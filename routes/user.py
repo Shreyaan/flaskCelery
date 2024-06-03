@@ -1,3 +1,6 @@
+import datetime
+import time
+
 from flask import Blueprint, jsonify
 
 import db.users as users_db
@@ -14,9 +17,13 @@ def get_user():
 
 @user.route("/user", methods=["POST"])
 def create_user():
-
-    email = "wedc@ccsd.com"
+    now = datetime.datetime.now()
+    email = now.strftime(
+        "%Y%m%d%H%M%S@domain.com"
+    )  # Format as YYYYMMDDHHMMSS@domain.com
     raw_user_meta_data = {"name": "Wedc"}
+    time.sleep(15)
+
     user = users_db.create_user(email, raw_user_meta_data)
     user_dict = user.to_dict()
     return jsonify(user_dict)

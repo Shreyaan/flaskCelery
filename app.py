@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.register_blueprint(user)
 
 pg_url = os.getenv("pg_url")
+redis_url = os.getenv("redis_url")
 db.init_db_connection(pg_url)
 init_tables()
 
